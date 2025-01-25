@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://cewsjr3phpr0h"]
+
+[ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="1_hm346"]
+[ext_resource type="Script" path="res://player_bubble.gd" id="1_qgob0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vpxpl"]
+friction = 0.1
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hv76"]
+albedo_texture = ExtResource("1_hm346")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ndu3m"]
+material = SubResource("StandardMaterial3D_2hv76")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_girrl"]
+
+[node name="PlayerBubble" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_vpxpl")
+gravity_scale = 0.5
+linear_damp = 2.0
+script = ExtResource("1_qgob0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ndu3m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_girrl")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.37786)
