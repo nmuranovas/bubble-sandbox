@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=12 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
+[ext_resource type="ArrayMesh" uid="uid://dqjlqwhnrx1p1" path="res://sphere_mech_newer.res" id="1_t0755"]
+[ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="2_wv50y"]
+[ext_resource type="Shader" path="res://soap_bubble.gdshader" id="4_dqlae"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kbdw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,6 +22,19 @@ glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vo575"]
 size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp16l"]
+albedo_texture = ExtResource("2_wv50y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tsn7f"]
+render_priority = 0
+shader = ExtResource("4_dqlae")
+shader_parameter/fuwafuwa_speed = 1.5
+shader_parameter/fuwafuwa_size = 0.05
+shader_parameter/outline_color = Color(1, 0.482081, 0.737803, 1)
+shader_parameter/outline_ratio = 1.0
+shader_parameter/noise_speed = 0.2
+shader_parameter/noise_scale = 0.5
 
 [node name="Main" type="Node3D"]
 
@@ -39,6 +55,24 @@ shape = SubResource("WorldBoundaryShape3D_lke48")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
 mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lp16l")
 
 [node name="PlayerBubble" parent="." instance=ExtResource("1_2512a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7005, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51552, 2.72601)
+
+[node name="SoftBody3D" type="SoftBody3D" parent="PlayerBubble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0997012, 0.0782118, 0.144048)
+mesh = ExtResource("1_t0755")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tsn7f")
+collision_layer = 0
+parent_collision_ignore = NodePath("..")
+linear_stiffness = 0.6
+pressure_coefficient = 50.0
+pinned_points = [167, 187]
+attachments/0/point_index = 167
+attachments/0/spatial_attachment_path = NodePath("..")
+attachments/0/offset = Vector3(-1.0997, 0.0781965, 0.144033)
+attachments/1/point_index = 187
+attachments/1/spatial_attachment_path = NodePath("..")
+attachments/1/offset = Vector3(0.900299, 0.0781965, 0.144033)
