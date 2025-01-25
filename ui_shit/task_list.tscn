@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rc8f7yjt1wtu"]
+[gd_scene load_steps=10 format=3 uid="uid://rc8f7yjt1wtu"]
 
 [ext_resource type="Script" path="res://ui_shit/task_list.gd" id="1_gy81g"]
 [ext_resource type="FontFile" uid="uid://w8505ue1jy8p" path="res://ui_shit/Inter-VariableFont_opsz,wght.ttf" id="2_b3i7f"]
@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="3_eeqjw"]
 [ext_resource type="Texture2D" uid="uid://bx6ilu2yt6idd" path="res://ui_shit/PlaqueFrame.png" id="5_h7lee"]
 [ext_resource type="Texture2D" uid="uid://csdy763plujfk" path="res://ui_shit/PlaqueShine.png" id="7_ixbgi"]
+[ext_resource type="AudioStream" uid="uid://bwkkm18v4hdvj" path="res://audio/Ui_Sfx.wav" id="8_gfcfc"]
+[ext_resource type="AudioStream" uid="uid://b1itdaqnhts5o" path="res://audio/Ui_Sfx 2.wav" id="9_603k2"]
 
-[node name="TaskList" type="Control" node_paths=PackedStringArray("list_node", "list_text", "pop_up_node", "pop_up_text")]
+[node name="TaskList" type="Control" node_paths=PackedStringArray("list_node", "list_text", "pop_up_node", "pop_up_text", "menu_open_sound", "menu_close_sound", "achievment_pop_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +22,9 @@ list_node = NodePath("PanelContainer2")
 list_text = NodePath("PanelContainer2/MarginContainer/ListTextLabel")
 pop_up_node = NodePath("PanelContainer")
 pop_up_text = NodePath("PanelContainer/MarginContainer/PupUpTextLabel")
+menu_open_sound = NodePath("MenuOpenSound")
+menu_close_sound = NodePath("MenuCloseSound")
+achievment_pop_sound = NodePath("AchiementPopUp")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -101,3 +106,12 @@ self_modulate = Color(1, 1, 1, 0.176471)
 layout_mode = 2
 texture = ExtResource("7_ixbgi")
 expand_mode = 1
+
+[node name="MenuOpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gfcfc")
+
+[node name="MenuCloseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_603k2")
+
+[node name="AchiementPopUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_gfcfc")

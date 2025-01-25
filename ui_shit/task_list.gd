@@ -8,6 +8,10 @@ extends Control
 
 @export var pop_up_time: float = 5
 
+@export var menu_open_sound: AudioStreamPlayer
+@export var menu_close_sound: AudioStreamPlayer
+@export var achievment_pop_sound: AudioStreamPlayer
+
 var achievments: Array = [
 	{
 		'is_done': false,
@@ -117,6 +121,11 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		list_node.visible = not list_node.visible
+		
+		if list_node.visible:
+			menu_open_sound.play(0)
+		else:
+			menu_close_sound.play(0)
 
 
 func complete(code: String):
@@ -141,6 +150,9 @@ func complete(code: String):
 	timer.timeout.connect(hide_pop_up) 
 	
 	timer.start()
+	
+	# also sound
+	achievment_pop_sound.play(0)
 
 
 func hide_pop_up():
