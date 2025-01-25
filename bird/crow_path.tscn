@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjykemdjcnyaa"]
+
+[ext_resource type="Script" path="res://crow/crow_path.gd" id="1_op7oh"]
+[ext_resource type="Script" path="res://crow/path_follow_3d.gd" id="2_xy168"]
+[ext_resource type="PackedScene" uid="uid://dbebwipkatbbv" path="res://bird/bird.tscn" id="3_2lk71"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qb560"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ebxwm"]
+sky_material = SubResource("ProceduralSkyMaterial_qb560")
+
+[sub_resource type="Environment" id="Environment_0p0wo"]
+background_mode = 2
+sky = SubResource("Sky_ebxwm")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_sbqbr"]
+bake_interval = 2.25
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.409749, -0.205923, 1.47268, 0, 0, 0, 0, 0, 0, -0.809122, -0.359975, 2.56123, 0, 0, 0, 0, 0, 0, -1.22412, -0.570783, 3.74984, 0, 0, 0, 0, 0, 0, 0.154379, -1.26233, 5.60163, 0, 0, 0, 0, 0, 0, 2.2467, -0.994011, 5.00451, 0, 0, 0, 0, 0, 0, -0.456529, 0.195929, 7.00285, 0, 0, 0, 0, 0, 0, -5.40567, 0.277591, 6.52255, 0, 0, 0, 0, 0, 0, -8.29011, 1.24588, 4.53038, 0, 0, 0, 0, 0, 0, -5.80217, 0.294626, 2.63163, 0, 0, 0, 0, 0, 0, -3.19291, -0.34173, 3.25621, 0, 0, 0, 0, 0, 0, -2.49969, -0.89375, 2.03367, 0, 0, 0, 0, 0, 0, -1.86075, -0.728585, 1.03751, 0, 0, 0, 0, 0, 0, -1.56898, -0.185414, -0.90893, 0, 0, 0, 0, 0, 0, -0.74917, 0.293328, -13.0705, 0, 0, 0, 0, 0, 0, 2.23021, 0.515042, -5.79876, 0.84, 0, -10, 0, 0, 0, -0.409749, -0.205923, 1.47268),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 16
+
+[node name="CrowPath" type="Node3D"]
+script = ExtResource("1_op7oh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0p0wo")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0410594, 0, -0.395586)
+curve = SubResource("Curve3D_sbqbr")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D" node_paths=PackedStringArray("reparent_node")]
+physics_interpolation_mode = 1
+transform = Transform3D(-0.938783, -0.0453651, 0.341438, 0, 0.991328, 0.131705, -0.344426, 0.123649, -0.93064, -0.409749, -0.205923, 1.47268)
+rotation_mode = 4
+script = ExtResource("2_xy168")
+reparent_node = NodePath("../..")
+
+[node name="Bird" parent="Path3D/PathFollow3D" instance=ExtResource("3_2lk71")]
+transform = Transform3D(-0.938837, 0, -0.344445, -0.0453616, 0.99125, 0.12364, 0.341432, 0.131702, -0.930624, 0.0248608, 0.0542254, 1.15537)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.937404, -0.13112, 0.322618, -0.0645679, 0.844908, 0.531, -0.342207, -0.518592, 0.783554, 1.40753, 1.92974, 10.4191)
+fov = 80.0
+
+[connection signal="bird_touched" from="Path3D/PathFollow3D/Bird" to="Path3D/PathFollow3D" method="_on_bird_touched"]
