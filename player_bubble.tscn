@@ -31,4 +31,4 @@ mesh = SubResource("SphereMesh_ndu3m")
 shape = SubResource("SphereShape3D_girrl")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.37786)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01323, 2.37786)

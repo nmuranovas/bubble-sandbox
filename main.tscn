@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=9 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
+[ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="2_wv50y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kbdw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,6 +20,9 @@ glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vo575"]
 size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lp16l"]
+albedo_texture = ExtResource("2_wv50y")
 
 [node name="Main" type="Node3D"]
 
@@ -39,6 +43,7 @@ shape = SubResource("WorldBoundaryShape3D_lke48")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
 mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lp16l")
 
 [node name="PlayerBubble" parent="." instance=ExtResource("1_2512a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7005, 0)
