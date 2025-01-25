@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjykemdjcnyaa"]
+[gd_scene load_steps=7 format=3 uid="uid://cjykemdjcnyaa"]
 
-[ext_resource type="Script" path="res://crow/crow_path.gd" id="1_op7oh"]
-[ext_resource type="Script" path="res://crow/path_follow_3d.gd" id="2_xy168"]
+[ext_resource type="Script" path="res://bird/path_follow_3d.gd" id="2_xy168"]
 [ext_resource type="PackedScene" uid="uid://dbebwipkatbbv" path="res://bird/bird.tscn" id="3_2lk71"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qb560"]
@@ -26,7 +25,6 @@ _data = {
 point_count = 16
 
 [node name="CrowPath" type="Node3D"]
-script = ExtResource("1_op7oh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0p0wo")
