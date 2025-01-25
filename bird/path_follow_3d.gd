@@ -14,12 +14,10 @@ func _process(delta: float) -> void:
 	current_position = bird.global_position
 	
 func _on_bird_touched() -> void:
-	print("Touched")
-	
+	print("Touched, disabling pathing")
 	var movement_vector = current_position - previous_position
-	print(movement_vector)
 	
+	# Removing from path
 	bird.call_deferred("reparent", reparent_node)
-
-	bird.apply_impulse(movement_vector)
 	
+	bird.apply_impulse(movement_vector)

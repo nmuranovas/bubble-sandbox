@@ -17,8 +17,9 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	# Add method call to death handling here
 	
 func _on_body_entered(body: Node) -> void:
-	print("Bird was touched... " + body.name)
+	print("Bird was touched by: " + body.name)
 	
+	set_deferred("gravity_scale", 1)
 	animation_player.stop(true)
 	
 	main_body_collision.set_deferred("disabled", true)
