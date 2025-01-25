@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cte2yffrokpwy"]
+
+[ext_resource type="Script" path="res://child/child.gd" id="1_vmpoj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oj0dd"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1nikk"]
+radius = 0.2
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gqfax"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cldbq"]
+radius = 0.05
+height = 0.5
+
+[node name="Child" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_vmpoj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_oj0dd")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_1nikk")
+
+[node name="Nose" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.252475, -0.229751)
+mesh = SubResource("CapsuleMesh_gqfax")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.2
+target_desired_distance = 0.2
+radius = 0.2
+
+[node name="Arms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.170714, 0)
+
+[node name="RightArm" type="MeshInstance3D" parent="Arms"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.191448, 0, -0.2)
+mesh = SubResource("CapsuleMesh_cldbq")
+
+[node name="LeftArm" type="MeshInstance3D" parent="Arms"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.191, 0, -0.2)
+mesh = SubResource("CapsuleMesh_cldbq")
