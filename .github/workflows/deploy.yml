@@ -1,0 +1,97 @@
+name: "Export and deploy to GitHub pages"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+
+env:
+  SUBPATH: ""
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Read env file
+        id: dotenv
+        uses: falti/dotenv-action@v1.1.4
+
+      - name: Set env variables
+        run: |
+          echo "GODOT_VERSION=${{ steps.dotenv.outputs.godot_version }}" >> $GITHUB_ENV
+          echo "GODOT_RELEASE_TYPE=${{ steps.dotenv.outputs.godot_release_type }}" >> $GITHUB_ENV
+          echo "PROJECT_NAME=${{ steps.dotenv.outputs.project_name }}" >> $GITHUB_ENV
+      
+      - name: Cache Godot engine and templates
+        id: cache-godot
+        uses: actions/cache@v3
+        with:
+          path: ./cache
+          key: ${{ runner.os }}-${{ steps.dotenv.outputs.godot_version }}-${{ steps.dotenv.outputs.godot_release_type }}
+      
+      - if: ${{ steps.cache-godot.outputs.cache-hit != 'true' }}
+        name: Download Godot engine and export templates
+        run: |
+          SUBPATH=""
+          if [ "$GODOT_RELEASE_TYPE" != "stable" ]; then
+              SUBPATH="/$GODOT_RELEASE_TYPE"
+          fi
+
+          wget --no-verbose -P ./cache https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBPATH}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64.zip
+          wget --no-verbose -P ./cache https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBPATH}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_export_templates.tpz
+
+      - name: Setup Godot engine and export templates
+        run: |
+          unzip ./cache/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64.zip
+          unzip ./cache/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_export_templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE_TYPE}
+          mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_RELEASE_TYPE}
+
+      - name: Create exports
+        run: |
+          ./Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64 -v --headless --export-release "Web" build/web/index.html
+          ./Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64 -v --headless --export-release "Windows Desktop" build/desktop/${PROJECT_NAME}.exe
+          ./Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64 -v --headless --export-release "Linux/X11" build/desktop/${PROJECT_NAME}.x86_64
+      
+      # Workaround for SharedArrayBuffer support on GitHub Pages
+      # See: https://github.com/godotengine/godot-proposals/issues/6616
+      - name: Add SharedArrayBuffer workaround
+        run: |
+          pushd build/web
+          curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > coi-serviceworker.js
+          sed -i 's#\(		<script src="index.js"></script>\)#		<script src="coi-serviceworker.js"></script>\n\1#g' index.html
+          popd
+
+      - name: Delete old release
+        run: gh release delete ${{ github.ref_name }} --cleanup-tag
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Create desktop export release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          tag: ${{ github.ref_name }}
+          name: Latest
+          makeLatest: true
+          artifacts: build/desktop/*
+      
+      - name: Upload web export
+        uses: actions/upload-artifact@v4
+        with:
+          name: web
+          path: build/web
+
+      - name: Deploy web export to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: build/web
