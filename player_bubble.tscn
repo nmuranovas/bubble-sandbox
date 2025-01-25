@@ -28,6 +28,7 @@ shader_parameter/noise_speed = 0.2
 shader_parameter/noise_scale = 0.5
 
 [node name="PlayerBubble" type="RigidBody3D"]
+collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
