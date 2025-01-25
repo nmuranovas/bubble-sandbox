@@ -45,8 +45,8 @@ jobs:
               SUBPATH="/$GODOT_RELEASE_TYPE"
           fi
 
-          wget --no-verbose -P ./cache https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBPATH}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64.zip
-          wget --no-verbose -P ./cache https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}${SUBPATH}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_export_templates.tpz
+          wget --no-verbose -P ./cache https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_RELEASE_TYPE}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_linux.x86_64.zip
+          wget --no-verbose -P ./cache https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_RELEASE_TYPE}/Godot_v${GODOT_VERSION}-${GODOT_RELEASE_TYPE}_export_templates.tpz
 
       - name: Setup Godot engine and export templates
         run: |
