@@ -1,3 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+build/*
+build/web/*
+!build/web/
+!build/web/.gdignore
+build/desktop/*
+!build/desktop/
+!build/desktop/.gdignore
