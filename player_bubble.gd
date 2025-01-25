@@ -25,4 +25,4 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate(Vector3.UP, -event.relative.x * 0.001)
 		rotate_object_local(Vector3.RIGHT, -event.relative.y * 0.001)
-		print(camera.global_transform.basis.z)
+		# print(camera.global_transform.basis.z)

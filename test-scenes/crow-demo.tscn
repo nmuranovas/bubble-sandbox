@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://ci6f6y7n67ogt"]
+
+[ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="2_ft2ko"]
+[ext_resource type="PackedScene" uid="uid://cjykemdjcnyaa" path="res://bird/crow_path.tscn" id="2_sieuk"]
+[ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="3_rq3q1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5y3p"]
+albedo_texture = ExtResource("3_rq3q1")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3ga2b"]
+size = Vector2(100, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_nquxs"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="PlayerBubble" parent="." instance=ExtResource("2_ft2ko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52515, 9.44866)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.67987, 0)
+light_energy = 2.051
+light_indirect_energy = 1.404
+
+[node name="CrowPath" parent="." instance=ExtResource("2_sieuk")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.6506, 0)
+material_override = SubResource("StandardMaterial3D_e5y3p")
+mesh = SubResource("PlaneMesh_3ga2b")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_nquxs")
