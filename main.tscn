@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://lpmo7d2sfpki"]
+[gd_scene load_steps=7 format=3 uid="uid://biqqdohmyymjn"]
+
+[ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kbdw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -40,3 +42,6 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.965377, 0.155036, -0.209788, 0, 0.80422, 0.594332, 0.260858, -0.573754, 0.776376, -1.46794, 4.13902, 5.66475)
+
+[node name="PlayerBubble" parent="." instance=ExtResource("1_2512a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7005, 0)
