@@ -40,8 +40,5 @@ shape = SubResource("WorldBoundaryShape3D_lke48")
 mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.965377, 0.155036, -0.209788, 0, 0.80422, 0.594332, 0.260858, -0.573754, 0.776376, -1.46794, 4.13902, 5.66475)
-
 [node name="PlayerBubble" parent="." instance=ExtResource("1_2512a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.7005, 0)
