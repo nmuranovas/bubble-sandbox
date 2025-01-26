@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw6s5x4nkfwq6"]
+
+[ext_resource type="PackedScene" uid="uid://c0vygvxcjhn0" path="res://Boat/boat.tscn" id="1_lai4i"]
+
+[sub_resource type="Curve3D" id="Curve3D_o3wu6"]
+bake_interval = 20.0
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.527795, 0, -0.012918, 0, 0, 0, 0, 0, 0, -0.479814, 0, -0.252825, 0, 0, 0, 0, 0, 0, -0.302652, 0, -0.418914, 0, 0, 0, 0, 0, 0, -0.0701267, 0, -0.518568, 0, 0, 0, 0, 0, 0, 0.173471, 0, -0.52595, 0, 0, 0, 0, 0, 0, 0.383851, 0, -0.426296, 0, 0, 0, 0, 0, 0, 0.524104, 0, -0.249134, 0, 0, 0, 0, 0, 0, 0.583158, 0, -0.0387542, 0, 0, 0, 0, 0, 0, 0.54994, 0, 0.23437, 0, 0, 0, 0, 0, 0, 0.417069, 0, 0.433678, 0, 0, 0, 0, 0, 0, 0.217762, 0, 0.540713, 0, 0, 0, 0, 0, 0, -0.0405997, 0, 0.537022, 0, 0, 0, 0, 0, 0, -0.302652, 0, 0.433678, 0, 0, 0, 0, 0, 0, -0.476123, 0, 0.252825, 0, 0, 0, 0, 0, 0, -0.527795, 0, -0.012918),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 15
+
+[node name="Boat" type="Node3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.265754, 0)
+curve = SubResource("Curve3D_o3wu6")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.980578, 0, -0.196115, 0, 1, 0, 0.196115, 0, 0.980578, -0.527795, 0, -0.012918)
+
+[node name="Boat" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("path_follow") instance=ExtResource("1_lai4i")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
+path_follow = NodePath("..")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=24 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cte2yffrokpwy" path="res://child/child.tscn" id="3_sut42"]
 [ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
 [ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
+[ext_resource type="Shader" path="res://water.gdshader" id="6_2inks"]
+[ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -47,6 +49,21 @@ plane = Plane(0, 0, -1, 0)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_41oaq"]
 plane = Plane(0, -1, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mv6dc"]
+render_priority = 0
+shader = ExtResource("6_2inks")
+shader_parameter/WaveSpeed = 0.01
+shader_parameter/WaveIntensity = 0.2
+shader_parameter/WaveColor = Color(0, 1, 0.986607, 1)
+shader_parameter/WaterColor = Color(0, 0.169643, 1, 1)
+shader_parameter/FoamSize = 0.1
+shader_parameter/WaterOpacity = 0.4
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dht4l"]
+material = SubResource("ShaderMaterial_mv6dc")
+top_radius = 0.8
+bottom_radius = 0.8
 
 [node name="Main" type="Node3D"]
 
@@ -131,4 +148,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61302, 7.49447, 19.9609)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790239, -15.6002)
 shape = SubResource("WorldBoundaryShape3D_41oaq")
 
+[node name="Water" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53889, -3.21546, 4.60989)
+mesh = SubResource("CylinderMesh_dht4l")
+skeleton = NodePath("../..")
+
 [node name="TaskList" parent="." instance=ExtResource("5_abj7b")]
+
+[node name="Boat" parent="." instance=ExtResource("7_ftlds")]
