@@ -15,86 +15,32 @@ extends Control
 var achievments: Array = [
 	{
 		'is_done': false,
-		'code': 'sandwich',
-		'list_text': 'land on sandwich ruining it',
-		'list_done': '“You weren\'t going to eat that, were you?'
-	},
-	{
-		'is_done': false,
-		'code': 'soda',
-		'list_text': 'knock empty soda can into recycles bin',
-		'list_done': '“I want my deposit back!'
-	},
-	{
-		'is_done': false,
 		'code': 'child',
-		'list_text': 'avoid being popped by children',
-		'list_done': 'cute little monsters'
-	},
-	{
-		'is_done': false,
-		'code': 'flock',
-		'list_text': 'traverse course through bird flock',
-		'list_done': 'Get the flock out of my way'
-	},
-	{
-		'is_done': false,
-		'code': 'news_paper',
-		'list_text': 'hit old mans news paper',
-		'list_done': 'No news is good news'
-	},
-	{
-		'is_done': false,
-		'code': 'fountain',
-		'list_text': 'land peacefully in water fountain',
-		'list_done': 'time for a soak'
+		'list_text': 'Get popped by a child',
+		'list_done': 'Cute little monsters'
 	},
 	{
 		'is_done': false,
 		'code': 'boat',
-		'list_text': 'pop and push paper boat',
+		'list_text': 'Push paper boat',
 		'list_done': 'Whatever blows your boat'
 	},
 	{
 		'is_done': false,
-		'code': 'up',
-		'list_text': 'float all the way up out of frame',
-		'list_done': 'I’m way to high, maaaaan'
-	},
-	{
-		'is_done': false,
 		'code': 'crows',
-		'list_text': 'pop around crows',
+		'list_text': 'Pop around crows',
 		'list_done': 'I could just murder a crow'
 	},
 	{
 		'is_done': false,
 		'code': 'kill_crow',
-		'list_text': 'hit a crow',
+		'list_text': 'Hit a crow',
 		'list_done': 'We\'re going down'
 	},
 	{
 		'is_done': false,
-		'code': 'paint',
-		'list_text': 'splatter on painters canvas',
-		'list_done': 'We cant all be Picasso'
-	},
-	{
-		'is_done': false,
-		'code': 'chair',
-		'list_text': 'stick to chair',
-		'list_done': 'Have a seat!'
-	},
-	{
-		'is_done': false,
-		'code': 'flower',
-		'list_text': 'pop on a flower',
-		'list_done': 'A rose by any other name…'
-	},
-	{
-		'is_done': false,
 		'code': 'tree',
-		'list_text': 'pop on a tree',
+		'list_text': 'Pop on a tree',
 		'list_done': 'Its about time you branched out'
 	}
 ]

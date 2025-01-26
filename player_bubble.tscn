@@ -33,12 +33,12 @@ rings = 16
 [node name="PlayerBubble" type="RigidBody3D"]
 collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_vpxpl")
-gravity_scale = 0.15
+gravity_scale = 0.1
 can_sleep = false
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
-linear_damp = 0.2
+linear_damp = 0.5
 script = ExtResource("1_qgob0")
 explosion_particles = ExtResource("2_o8yy3")
 
