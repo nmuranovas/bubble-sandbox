@@ -1,31 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://cewsjr3phpr0h"]
+[gd_scene load_steps=7 format=3 uid="uid://cewsjr3phpr0h"]
 
-[ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="1_hm346"]
 [ext_resource type="Script" path="res://player_bubble.gd" id="1_qgob0"]
-[ext_resource type="ArrayMesh" uid="uid://dqjlqwhnrx1p1" path="res://sphere_mech_newer.res" id="3_xv1w1"]
-[ext_resource type="Shader" path="res://soap_bubble.gdshader" id="4_k8ckx"]
+[ext_resource type="Shader" path="res://bubble_new.gdshader" id="5_3f5ay"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vpxpl"]
 friction = 0.1
 bounce = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hv76"]
-albedo_texture = ExtResource("1_hm346")
-
-[sub_resource type="SphereMesh" id="SphereMesh_ndu3m"]
-material = SubResource("StandardMaterial3D_2hv76")
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_girrl"]
+radius = 0.1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ro5bx"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyr3b"]
 render_priority = 0
-shader = ExtResource("4_k8ckx")
-shader_parameter/fuwafuwa_speed = 1.5
-shader_parameter/fuwafuwa_size = 0.05
-shader_parameter/outline_color = Color(1, 0.482081, 0.737803, 1)
-shader_parameter/outline_ratio = 1.0
+shader = ExtResource("5_3f5ay")
+shader_parameter/distortion_speed = 0.5
+shader_parameter/distortion_power = 0.1
+shader_parameter/bubble_speed = 1.5
+shader_parameter/bubble_size = 0.05
+shader_parameter/outline_color = Color(0.45, 0.7, 1, 1)
+shader_parameter/outline_ratio = 0.5
 shader_parameter/noise_speed = 0.2
 shader_parameter/noise_scale = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xf1l1"]
+material = SubResource("ShaderMaterial_vyr3b")
+radius = 1.0
+radial_segments = 128
+rings = 16
 
 [node name="PlayerBubble" type="RigidBody3D"]
 collision_mask = 7
@@ -33,32 +34,19 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_vpxpl")
-gravity_scale = 0.5
+gravity_scale = 0.2
+can_sleep = false
 linear_damp = 2.0
 script = ExtResource("1_qgob0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("SphereMesh_ndu3m")
+move_speed = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_girrl")
 
 [node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.731563, 3.00455)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13995, 0.600946)
 
-[node name="SoftBody3D" type="SoftBody3D" parent="."]
-mesh = ExtResource("3_xv1w1")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_ro5bx")
-collision_layer = 0
-parent_collision_ignore = NodePath("..")
-linear_stiffness = 0.6
-pressure_coefficient = 50.0
-pinned_points = [167, 187]
-attachments/0/point_index = 167
-attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-1, -1.52588e-05, -1.52588e-05)
-attachments/1/point_index = 187
-attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(1, -1.52588e-05, -1.52588e-05)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_xf1l1")
+skeleton = NodePath("")

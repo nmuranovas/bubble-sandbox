@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=12 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="2_wv50y"]
+[ext_resource type="PackedScene" uid="uid://cte2yffrokpwy" path="res://child/child.tscn" id="3_sut42"]
+[ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
+vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7kbdw"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,7 +32,8 @@ albedo_texture = ExtResource("2_wv50y")
 
 [node name="Main" type="Node3D"]
 
-[node name="Environment" type="Node3D" parent="."]
+[node name="Environment" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_e43t2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_0pdku")
@@ -41,9 +48,19 @@ shadow_enabled = true
 shape = SubResource("WorldBoundaryShape3D_lke48")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
+visible = false
 mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lp16l")
 
 [node name="PlayerBubble2" parent="." instance=ExtResource("1_2512a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.84, 1.516, 2.726)
+
+[node name="Child" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sut42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95207, 0.596156, 0.442205)
+target = NodePath("../PlayerBubble2")
+attention_range = 4.0
+walk_speed = 1.0
+
+[node name="Map" parent="." instance=ExtResource("4_nx04s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45342, 2.45124, -4.53616)

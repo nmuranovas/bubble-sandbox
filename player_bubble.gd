@@ -4,19 +4,20 @@ extends RigidBody3D
 
 @export var disable_movement: bool
 
-@onready var soft_body_3d: SoftBody3D = $SoftBody3D
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var camera: Camera3D = $Camera
+
+var accumulator: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	state.transform.basis = state.transform.basis.rotated(Vector3.UP, accumulator.y)
+	state.transform.basis = state.transform.basis.rotated(Vector3.RIGHT.rotated(Vector3.UP, rotation.y+accumulator.y), accumulator.x)
+	accumulator = Vector3.ZERO
+
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("grow"):
-		soft_body_3d.scale *= Vector3(1.2, 1.2, 1.2)
-		collision_shape_3d.shape.radius *= 1.2
-		camera.position.z *= 1.2
-		
 	if disable_movement: return
 	
 	var move_dir = Input.get_vector("move_forward", "move_back", "move_left", "move_right")
@@ -28,15 +29,18 @@ func _physics_process(delta: float) -> void:
 	var force = move_dir.x * force_dir * move_speed + move_dir.y * left * move_speed
 	
 	if Input.is_action_pressed("move_up"):
-		force += Vector3.UP * move_speed
+		force += Vector3.UP * move_speed * 1.5
 	if Input.is_action_pressed("move_down"):
-		force += Vector3.DOWN * move_speed
+		force += Vector3.DOWN * move_speed * 1.5
 	
 	apply_central_force(force)
 
-
 func _input(event):
 	if event is InputEventMouseMotion:
-		rotate(Vector3.UP, -event.relative.x * 0.001)
-		rotate_object_local(Vector3.RIGHT, -event.relative.y * 0.001)
+		accumulator.y += -event.relative.x * 0.001
+		accumulator.x += -event.relative.y * 0.001
+		rotate_object_local
+		#rotate(Vector3.UP, -event.relative.x * 0.001)
+		#rotate_object_local(Vector3.RIGHT, -event.relative.y * 0.001)
+		#print(rotation)
 	
