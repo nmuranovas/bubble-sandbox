@@ -14,7 +14,8 @@ func _ready() -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	print("POP!")
-	# Add method call to death handling here
+	Autobusas.die_signal.emit()
+	Autobusas.get_achievement.emit("crows")
 	
 func _on_body_entered(body: Node) -> void:
 	print("Bird was touched by: " + body.name)
@@ -28,3 +29,5 @@ func _on_body_entered(body: Node) -> void:
 	beak_collision.set_deferred("disabled", true)
 	
 	bird_touched.emit()
+	
+	Autobusas.get_achievement.emit("kill_crow")

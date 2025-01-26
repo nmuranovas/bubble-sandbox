@@ -15,12 +15,6 @@ extends Control
 var achievments: Array = [
 	{
 		'is_done': false,
-		'code': 'crows',
-		'list_text': 'pop on bowl of Šaltibarščiai',
-		'list_done': '“Shall I burst here?'
-	},
-	{
-		'is_done': false,
 		'code': 'sandwich',
 		'list_text': 'land on sandwich ruining it',
 		'list_done': '“You weren\'t going to eat that, were you?'
@@ -75,6 +69,12 @@ var achievments: Array = [
 	},
 	{
 		'is_done': false,
+		'code': 'kill_crow',
+		'list_text': 'hit a crow',
+		'list_done': 'We\'re going down'
+	},
+	{
+		'is_done': false,
 		'code': 'paint',
 		'list_text': 'splatter on painters canvas',
 		'list_done': 'We cant all be Picasso'
@@ -96,12 +96,6 @@ var achievments: Array = [
 		'code': 'tree',
 		'list_text': 'pop on a tree',
 		'list_done': 'Its about time you branched out'
-	},
-	{
-		'is_done': false,
-		'code': 'crows',
-		'list_text': 'ayo',
-		'done_text': 'gg my man'
 	}
 ]
 

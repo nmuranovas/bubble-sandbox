@@ -11,11 +11,11 @@ uniform float outline_ratio = 1.0;
 uniform float noise_speed = 0.2;
 uniform float noise_scale = 0.5;
 
-float random(vec2 pos) { 
+float random(vec2 pos) {
 	return fract(sin(dot(pos, vec2(12.9898,78.233))) * 43758.5453);
 }
 
-//	Simplex 3D Noise 
+//	Simplex 3D Noise
 //	by Ian McEwan, Ashima Arts
 vec4 permute(vec4 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
 vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
@@ -35,16 +35,16 @@ float snoise(vec3 v) {
 	vec3 i1 = min( g.xyz, l.zxy );
 	vec3 i2 = max( g.xyz, l.zxy );
 
-	//  x0 = x0 - 0. + 0.0 * C 
+	//  x0 = x0 - 0. + 0.0 * C
 	vec3 x1 = x0 - i1 + 1.0 * Cxxx;
 	vec3 x2 = x0 - i2 + 2.0 * Cxxx;
 	vec3 x3 = x0 - 1. + 3.0 * Cxxx;
 
 	// Permutations
-	i = mod(i, 289.0 ); 
-	vec4 p = permute( permute( permute( 
+	i = mod(i, 289.0 );
+	vec4 p = permute( permute( permute(
              i.z + vec4(0.0, i1.z, i2.z, 1.0 ))
-           + i.y + vec4(0.0, i1.y, i2.y, 1.0 )) 
+           + i.y + vec4(0.0, i1.y, i2.y, 1.0 ))
            + i.x + vec4(0.0, i1.x, i2.x, 1.0 ));
 
 	// Gradients
@@ -53,21 +53,21 @@ float snoise(vec3 v) {
 	vec3  ns = n_ * D.wyz - D.xzx;
 
 	vec4 j = p - 49.0 * floor(p * ns.z *ns.z);  //  mod(p,N*N)
-	
+
 	vec4 x_ = floor(j * ns.z);
 	vec4 y_ = floor(j - 7.0 * x_ );    // mod(j,N)
-	
+
 	vec4 x = x_ *ns.x + vec4(ns.y);
 	vec4 y = y_ *ns.x + vec4(ns.y);
 	vec4 h = 1.0 - abs(x) - abs(y);
 
 	vec4 b0 = vec4( x.xy, y.xy );
 	vec4 b1 = vec4( x.zw, y.zw );
-	
+
 	vec4 s0 = floor(b0)*2.0 + 1.0;
 	vec4 s1 = floor(b1)*2.0 + 1.0;
 	vec4 sh = -step(h, vec4(0.0));
-	
+
 	vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy ;
 	vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww ;
 
@@ -86,7 +86,7 @@ float snoise(vec3 v) {
 // Mix final noise value
 	vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
 	m = m * m;
-	return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
+	return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1),
 								  dot(p2,x2), dot(p3,x3) ) );
 }
 

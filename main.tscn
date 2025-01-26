@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=26 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
@@ -8,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
 [ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
 [ext_resource type="Shader" path="res://water.gdshader" id="6_2inks"]
+[ext_resource type="PackedScene" uid="uid://cjykemdjcnyaa" path="res://bird/crow_path.tscn" id="6_fov5c"]
 [ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
 [ext_resource type="PackedScene" uid="uid://dhis05v1drdsb" path="res://assets/bin.tscn" id="10_y8nvh"]
 [ext_resource type="PackedScene" uid="uid://bgqoc2ptnrbru" path="res://assets/chair.tscn" id="11_xouko"]
 [ext_resource type="PackedScene" uid="uid://or7x5sip23ge" path="res://assets/table.tscn" id="12_vylbd"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="8_0nnl6"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -104,9 +106,10 @@ autoplay = true
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.73674, 5.13898, -4.05429)
 
-[node name="PlayerBubble2" parent="." node_paths=PackedStringArray("spawn") instance=ExtResource("1_2512a")]
+[node name="PlayerBubble2" parent="." node_paths=PackedStringArray("spawn", "camera") instance=ExtResource("1_2512a")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.73674, 5.13898, -4.05429)
 spawn = NodePath("../Spawn")
+camera = NodePath("../Node3D/SpringArm3D/Camera3D")
 
 [node name="Child" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sut42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95207, 0.596156, 0.442205)
@@ -183,3 +186,17 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.4545
 [node name="TaskList" parent="." instance=ExtResource("5_abj7b")]
 
 [node name="Boat" parent="." instance=ExtResource("7_ftlds")]
+
+[node name="CrowPath" parent="." instance=ExtResource("6_fov5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31752, 6.52785, -2.54969)
+
+[node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74205, 0)
+script = ExtResource("8_0nnl6")
+player = NodePath("../PlayerBubble2")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Node3D"]
+spring_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/SpringArm3D"]
+current = true
