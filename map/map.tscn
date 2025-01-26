@@ -1,6 +1,7 @@
-[gd_scene load_steps=215 format=3 uid="uid://ba2g72xcfbfih"]
+[gd_scene load_steps=216 format=3 uid="uid://ba2g72xcfbfih"]
 
 [ext_resource type="PackedScene" uid="uid://16ea1f3e8iep" path="res://map/gamejam.glb" id="1_yqoc2"]
+[ext_resource type="PackedScene" uid="uid://dysawlnes51wp" path="res://assets/building.glb" id="2_48f2l"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0prr1"]
 points = PackedVector3Array(-1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1)
@@ -1501,3 +1502,24 @@ shape = SubResource("ConvexPolygonShape3D_xdlsf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_070/StaticBody3D" index="0"]
 shape = SubResource("ConvexPolygonShape3D_20win")
+
+[node name="building" parent="." index="110" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25314, 0, -8.20817)
+
+[node name="building4" parent="." index="111" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25314, 0, -3.07923)
+
+[node name="building5" parent="." index="112" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2451, 0, -3.07923)
+
+[node name="building6" parent="." index="113" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.46697, 0, -3.07923)
+
+[node name="building7" parent="." index="114" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7922, 0, -3.07923)
+
+[node name="building2" parent="." index="115" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25314, 0, -13.0925)
+
+[node name="building3" parent="." index="116" instance=ExtResource("2_48f2l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25314, 0, -18.1357)
