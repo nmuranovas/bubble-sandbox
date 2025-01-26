@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=26 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
 [ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
 [ext_resource type="Shader" path="res://water.gdshader" id="6_2inks"]
-[ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
 [ext_resource type="PackedScene" uid="uid://cjykemdjcnyaa" path="res://bird/crow_path.tscn" id="6_fov5c"]
+[ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="8_0nnl6"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
@@ -162,6 +162,7 @@ skeleton = NodePath("../..")
 
 [node name="CrowPath" parent="." instance=ExtResource("6_fov5c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31752, 6.52785, -2.54969)
+
 [node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74205, 0)
 script = ExtResource("8_0nnl6")
