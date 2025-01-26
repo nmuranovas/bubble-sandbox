@@ -1,7 +1,7 @@
 class_name Bubble
 extends RigidBody3D
 
-@export var move_speed : float = 20.0
+@export var move_speed : float = 2.5
 
 @export var disable_movement: bool
 
@@ -10,7 +10,7 @@ extends RigidBody3D
 @export var spawn: Node3D
 
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
-@onready var camera: Camera3D = $Camera
+@export var camera: Camera3D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 const BUBBLE_WOBBLE_SFX_1 = preload("res://assets/audio/Bubble_Wobble_Sfx_1.wav")
@@ -47,15 +47,16 @@ func die():
 	global_rotation = spawn.global_rotation
 	
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	state.transform.basis = state.transform.basis.rotated(Vector3.UP, accumulator.y)
-	state.transform.basis = state.transform.basis.rotated(Vector3.RIGHT.rotated(Vector3.UP, rotation.y+accumulator.y), accumulator.x)
-	accumulator = Vector3.ZERO
+#func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	#state.transform.basis = state.transform.basis.rotated(Vector3.UP, accumulator.y)
+	#state.transform.basis = state.transform.basis.rotated(Vector3.RIGHT.rotated(Vector3.UP, rotation.y+accumulator.y), accumulator.x)
+	#accumulator = Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
 	if disable_movement: return
 	
 	var move_dir = Input.get_vector("move_forward", "move_back", "move_left", "move_right")
+	if move_dir == Vector2.ZERO and not Input.is_action_pressed("move_up") and not Input.is_action_pressed("move_down"): return
 
 	var forward = camera.global_transform.basis.z
 	var left = camera.global_transform.basis.x
@@ -73,16 +74,12 @@ func _physics_process(delta: float) -> void:
 	
 
 func _input(event):
-	if event is InputEventMouseMotion:
-		accumulator.y += -event.relative.x * 0.001
-		accumulator.x += -event.relative.y * 0.001
-	
 	if event is InputEventKey and event.keycode == KEY_TAB:
 		Autobusas.die_signal.emit()
 	
 
 
-func _on_body_entered(body: Node) -> void:
+func _on_body_entered(_body: Node) -> void:
 	if last_bounce_delta < 0.20:
 		return
 

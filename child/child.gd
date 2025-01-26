@@ -60,12 +60,12 @@ func _physics_process(delta: float) -> void:
 	var horizontal_distance = sqrt(target_direction.x * target_direction.x + target_direction.z * target_direction.z)
 	var vertical_angle = atan2(horizontal_distance, target_direction.y)
 	
-	var angle_arms = atan2(direction.rotated(Vector3.UP, angle).y, direction.rotated(Vector3.UP, angle).z)
+	var _angle_arms = atan2(direction.rotated(Vector3.UP, angle).y, direction.rotated(Vector3.UP, angle).z)
 	arms.rotation.x = vertical_angle - PI/2.0
 	
 	move_and_slide()
 
-func turn_towards_angle(current_angle: float, target_angle: float, walk_speed: float, delta: float) -> float:
+func turn_towards_angle(current_angle: float, target_angle: float, _walk_speed: float, delta: float) -> float:
 	# Normalize the angles to ensure correct calculations
 	current_angle = wrapf(current_angle, -PI, PI)
 	target_angle = wrapf(target_angle, -PI, PI)
