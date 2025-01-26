@@ -5,7 +5,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_27d4y"]
 height = 0.289161
-radius = 0.0721876
+radius = 0.14385
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_31w0x"]
 size = Vector3(0.137207, 1.12476, 0.889709)
@@ -24,7 +24,7 @@ angular_damp = 1.0
 script = ExtResource("2_1wn27")
 
 [node name="crow" parent="." index="0"]
-transform = Transform3D(1000, 0, 0, 0, -4.37114e-05, 1000, 0, -1000, -4.37114e-05, 0, 0, 0)
+transform = Transform3D(500, 0, 0, 0, -2.18557e-05, 500, 0, -500, -2.18557e-05, 0, 0, 0)
 
 [node name="Skeleton3D" parent="crow" index="0"]
 bones/0/position = Vector3(1.10145e-05, -0.000293976, 0.00114469)
@@ -286,7 +286,7 @@ transform = Transform3D(-0.00883151, 0.00241226, -0.00402311, 0.00238572, -0.005
 bone_idx = 78
 
 [node name="BeakArea" type="Area3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0)
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BeakArea" index="0"]
@@ -294,7 +294,7 @@ transform = Transform3D(1, 0, 0, 0, -0.913105, 0.407725, 0, -0.407725, -0.913105
 shape = SubResource("CylinderShape3D_27d4y")
 
 [node name="LeftWingAttach" type="BoneAttachment3D" parent="." index="3"]
-transform = Transform3D(-7.8892, 5.3384, -3.04337, 5.87905, 7.99826, -1.21021, -1.7881, 2.74397, 9.44845, -0.689093, 1.6154, 0.807876)
+transform = Transform3D(-3.9446, 2.6692, -1.52168, 2.93953, 3.99913, -0.605107, -0.894052, 1.37199, 4.72423, -0.344547, 0.807698, 0.403938)
 bone_name = "Plane.001"
 bone_idx = 64
 use_external_skeleton = true
@@ -305,7 +305,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftWingAttach/StaticBody3D" index="0"]
-transform = Transform3D(0.0142444, -0.0989335, -0.00304278, 0.0937643, 0.0125026, 0.0324338, -0.0317074, -0.00747304, 0.0945452, 0.0106635, -0.0139442, -0.00160055)
+transform = Transform3D(0.0071222, -0.0494668, -0.0015214, 0.0468821, 0.0062513, 0.0162169, -0.0158537, -0.00373652, 0.0472726, -0.0482654, -0.0680705, -0.0337636)
 shape = SubResource("BoxShape3D_31w0x")
 disabled = true
 
@@ -313,11 +313,11 @@ disabled = true
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftWingAttach/Area3D" index="0"]
-transform = Transform3D(0.0142444, -0.0989335, -0.00304278, 0.0937643, 0.0125026, 0.0324338, -0.0317074, -0.00747304, 0.0945452, 0.0106635, -0.0139442, -0.00160055)
+transform = Transform3D(0.0071222, -0.0494668, -0.0015214, 0.0468821, 0.0062513, 0.0162169, -0.0158537, -0.00373652, 0.0472726, -0.0482654, -0.0680705, -0.0337636)
 shape = SubResource("BoxShape3D_31w0x")
 
 [node name="RightWingAttach" type="BoneAttachment3D" parent="." index="4"]
-transform = Transform3D(8.12015, -3.88421, 4.35616, 5.28392, 8.06229, -2.66075, -2.47857, 4.46233, 8.59908, 0.660829, 1.60305, 0.793127)
+transform = Transform3D(4.06007, -1.9421, 2.17808, 2.64196, 4.03114, -1.33038, -1.23928, 2.23116, 4.29954, 0.330415, 0.801526, 0.396564)
 bone_name = "Plane.026"
 bone_idx = 44
 use_external_skeleton = true
@@ -328,7 +328,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightWingAttach/StaticBody3D" index="0"]
-transform = Transform3D(-0.0142444, 0.0989335, 0.00304278, -0.0937643, -0.0125026, -0.0324338, 0.0317074, 0.00747304, -0.0945452, 0.0106635, -0.0139442, -0.00160055)
+transform = Transform3D(-0.0071222, 0.0494668, 0.0015214, -0.0468821, -0.00625131, -0.0162169, 0.0158537, 0.00373651, -0.0472726, -0.0380953, -0.0790233, -0.0236085)
 shape = SubResource("BoxShape3D_31w0x")
 disabled = true
 
@@ -336,17 +336,17 @@ disabled = true
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightWingAttach/Area3D" index="0"]
-transform = Transform3D(-0.0142444, 0.0989335, 0.00304278, -0.0937643, -0.0125026, -0.0324338, 0.0317074, 0.00747304, -0.0945452, 0.0106635, -0.0139442, -0.00160055)
+transform = Transform3D(-0.0071222, 0.0494668, 0.0015214, -0.0468821, -0.00625131, -0.0162169, 0.0158537, 0.00373651, -0.0472726, -0.0380953, -0.0790233, -0.0236085)
 shape = SubResource("BoxShape3D_31w0x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="5"]
-transform = Transform3D(10, 0, 0, 0, 1.2587, -9.92047, 0, 9.92047, 1.2587, -0.0550073, 1.28421, 0.521794)
+transform = Transform3D(6, 0, 0, 0, 0.75522, -5.95228, 0, 5.95228, 0.75522, -0.00625452, 0.55901, 0.156801)
 shape = SubResource("CapsuleShape3D_4f4do")
 
 [node name="BirdArea" type="Area3D" parent="." index="6"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BirdArea" index="0"]
-transform = Transform3D(10, 0, 0, 0, 1.2587, -9.92047, 0, 9.92047, 1.2587, -0.0550073, 1.28421, 0.521794)
+transform = Transform3D(6, 0, 0, 0, 0.75522, -5.95228, 0, 5.95228, 0.75522, -0.00625452, 0.55901, 0.156801)
 shape = SubResource("CapsuleShape3D_4f4do")
 
 [connection signal="body_entered" from="BeakArea" to="." method="_on_area_3d_body_entered"]

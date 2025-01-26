@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
 [ext_resource type="Shader" path="res://water.gdshader" id="6_2inks"]
 [ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
+[ext_resource type="PackedScene" uid="uid://cjykemdjcnyaa" path="res://bird/crow_path.tscn" id="6_fov5c"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -156,3 +157,6 @@ skeleton = NodePath("../..")
 [node name="TaskList" parent="." instance=ExtResource("5_abj7b")]
 
 [node name="Boat" parent="." instance=ExtResource("7_ftlds")]
+
+[node name="CrowPath" parent="." instance=ExtResource("6_fov5c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31752, 6.52785, -2.54969)

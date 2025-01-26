@@ -20,4 +20,4 @@ func _on_bird_touched() -> void:
 	# Removing from path
 	bird.call_deferred("reparent", reparent_node)
 	
-	bird.apply_impulse(movement_vector)
+	bird.apply_impulse(movement_vector * 5)
