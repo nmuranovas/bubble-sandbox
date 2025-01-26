@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="3_eeqjw"]
 [ext_resource type="Texture2D" uid="uid://bx6ilu2yt6idd" path="res://ui_shit/PlaqueFrame.png" id="5_h7lee"]
 [ext_resource type="Texture2D" uid="uid://csdy763plujfk" path="res://ui_shit/PlaqueShine.png" id="7_ixbgi"]
-[ext_resource type="AudioStream" uid="uid://bwkkm18v4hdvj" path="res://audio/Ui_Sfx.wav" id="8_gfcfc"]
-[ext_resource type="AudioStream" uid="uid://b1itdaqnhts5o" path="res://audio/Ui_Sfx 2.wav" id="9_603k2"]
+[ext_resource type="AudioStream" uid="uid://dyhru7logn21o" path="res://audio/Paper_Sfx.wav" id="8_jvh5k"]
+[ext_resource type="AudioStream" uid="uid://dx0ktcogkjeim" path="res://audio/Achievement_sfx.wav" id="9_dvks2"]
 
 [node name="TaskList" type="Control" node_paths=PackedStringArray("list_node", "list_text", "pop_up_node", "pop_up_text", "menu_open_sound", "menu_close_sound", "achievment_pop_sound")]
 layout_mode = 3
@@ -110,10 +110,10 @@ texture = ExtResource("7_ixbgi")
 expand_mode = 1
 
 [node name="MenuOpenSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_gfcfc")
+stream = ExtResource("8_jvh5k")
 
 [node name="MenuCloseSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_603k2")
+stream = ExtResource("8_jvh5k")
 
 [node name="AchiementPopUp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_gfcfc")
+stream = ExtResource("9_dvks2")

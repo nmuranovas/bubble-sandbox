@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=29 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cjykemdjcnyaa" path="res://bird/crow_path.tscn" id="6_fov5c"]
 [ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
 [ext_resource type="Script" path="res://camera_3d.gd" id="8_0nnl6"]
+[ext_resource type="Script" path="res://tree_area.gd" id="8_brj1b"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -66,6 +67,14 @@ shader_parameter/WaterOpacity = 0.4
 material = SubResource("ShaderMaterial_mv6dc")
 top_radius = 0.8
 bottom_radius = 0.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qlfr6"]
+radius = 0.75313
+height = 4.94794
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_quaq5"]
+radius = 1.21785
+height = 5.09865
 
 [node name="Main" type="Node3D"]
 
@@ -156,6 +165,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53889, -3.21546, 4.60989)
 mesh = SubResource("CylinderMesh_dht4l")
 skeleton = NodePath("../..")
 
+[node name="Tree" type="Node3D" parent="Map"]
+script = ExtResource("8_brj1b")
+
+[node name="TreeArea" type="Area3D" parent="Map/Tree"]
+
+[node name="TruncCollision" type="CollisionShape3D" parent="Map/Tree/TreeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.699693, 0, 10.9356)
+shape = SubResource("CapsuleShape3D_qlfr6")
+
+[node name="BranchesCollision" type="CollisionShape3D" parent="Map/Tree/TreeArea"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.361115, 2.19941, 11.1976)
+shape = SubResource("CapsuleShape3D_quaq5")
+
 [node name="TaskList" parent="." instance=ExtResource("5_abj7b")]
 
 [node name="Boat" parent="." instance=ExtResource("7_ftlds")]
@@ -173,3 +195,5 @@ spring_length = 0.5
 
 [node name="Camera3D" type="Camera3D" parent="Node3D/SpringArm3D"]
 current = true
+
+[connection signal="body_entered" from="Map/Tree/TreeArea" to="Map/Tree" method="_on_tree_area_body_entered"]
