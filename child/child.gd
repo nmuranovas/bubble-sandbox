@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	var distance_to_target = Vector2(global_position.x, global_position.z) \
 		.distance_to(Vector2(target.global_position.x, target.global_position.z))
 	
-	if distance_to_target > attention_range:
+	if global_position.distance_to(target.global_position) > attention_range:
 		move_and_slide()
 		arms.rotation.x = turn_towards_angle(arms.rotation.x, -PI / 2.0, 4.0, delta)
 		return

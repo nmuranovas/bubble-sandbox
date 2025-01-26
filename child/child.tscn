@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cte2yffrokpwy"]
+[gd_scene load_steps=8 format=3 uid="uid://cte2yffrokpwy"]
 
 [ext_resource type="Script" path="res://child/child.gd" id="1_vmpoj"]
+[ext_resource type="Texture2D" uid="uid://byhqwoj3ul36t" path="res://child/face.jpg" id="2_w37pf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oj0dd"]
 radius = 0.2
@@ -10,9 +11,11 @@ height = 1.0
 radius = 0.2
 height = 1.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gqfax"]
-radius = 0.1
-height = 0.2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qkli"]
+albedo_texture = ExtResource("2_w37pf")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u6p25"]
+size = Vector2(0.2, 0.2)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cldbq"]
 radius = 0.05
@@ -25,14 +28,16 @@ axis_lock_angular_z = true
 script = ExtResource("1_vmpoj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.211947, 0)
 shape = SubResource("CapsuleShape3D_oj0dd")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_1nikk")
 
 [node name="Nose" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.252475, -0.229751)
-mesh = SubResource("CapsuleMesh_gqfax")
+transform = Transform3D(-1, -6.69824e-10, -8.74202e-08, 8.70199e-08, 0.0882685, -0.996097, 8.38366e-09, -0.996097, -0.0882685, 0, 0.334543, -0.203416)
+material_override = SubResource("StandardMaterial3D_1qkli")
+mesh = SubResource("PlaneMesh_u6p25")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 0.2
