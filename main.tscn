@@ -1,6 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=20 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
+[ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
+[ext_resource type="AudioStream" uid="uid://5tlx2b6suyrn" path="res://assets/audio/Basic Ambience 2.ogg" id="2_odcbd"]
 [ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="2_wv50y"]
 [ext_resource type="PackedScene" uid="uid://cte2yffrokpwy" path="res://child/child.tscn" id="3_sut42"]
 [ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
@@ -63,12 +65,21 @@ shadow_enabled = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_lke48")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Environment/StaticBody3D"]
+stream = ExtResource("1_uwtky")
+unit_size = 1.0
+autoplay = true
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.68319)
 visible = false
 mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lp16l")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Environment"]
+stream = ExtResource("2_odcbd")
+autoplay = true
 
 [node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.73674, 5.13898, -4.05429)

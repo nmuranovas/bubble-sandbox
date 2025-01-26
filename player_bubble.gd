@@ -11,14 +11,24 @@ extends RigidBody3D
 
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var camera: Camera3D = $Camera
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+const BUBBLE_WOBBLE_SFX_1 = preload("res://assets/audio/Bubble_Wobble_Sfx_1.wav")
+const BUBBLE_WOBBLE_SFX_2 = preload("res://assets/audio/Bubble_Wobble_Sfx_2.wav")
+const BUBBLE_WOBBLE_SFX_3 = preload("res://assets/audio/Bubble_Wobble_Sfx_3.wav")
+
+var bounce_sounds = []
 
 @onready var bubble: MeshInstance3D = $Bubble
 
 var accumulator: Vector3 = Vector3.ZERO
 
+var last_bounce_delta : float = 0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Autobusas.die_signal.connect(die)
+	bounce_sounds = [BUBBLE_WOBBLE_SFX_1, BUBBLE_WOBBLE_SFX_2, BUBBLE_WOBBLE_SFX_3]
 
 func die():
 	var particles = explosion_particles.instantiate()
@@ -59,6 +69,8 @@ func _physics_process(delta: float) -> void:
 		force += Vector3.DOWN * move_speed * 1.5
 	
 	apply_central_force(force)
+	last_bounce_delta += delta
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -68,3 +80,13 @@ func _input(event):
 	if event is InputEventKey and event.keycode == KEY_TAB:
 		Autobusas.die_signal.emit()
 	
+
+
+func _on_body_entered(body: Node) -> void:
+	if last_bounce_delta < 0.20:
+		return
+
+	audio_stream_player.stream = bounce_sounds.pick_random()
+	audio_stream_player.pitch_scale = randf_range(0.8, 1.2)
+	audio_stream_player.play()
+	last_bounce_delta = 0
