@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=27 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="AudioStream" uid="uid://ck68qwm4lrmsr" path="res://assets/audio/Water Fountain.ogg" id="1_uwtky"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
 [ext_resource type="Shader" path="res://water.gdshader" id="6_2inks"]
 [ext_resource type="PackedScene" uid="uid://dw6s5x4nkfwq6" path="res://Boat/boat_follow.tscn" id="7_ftlds"]
+[ext_resource type="PackedScene" uid="uid://dhis05v1drdsb" path="res://assets/bin.tscn" id="10_y8nvh"]
+[ext_resource type="PackedScene" uid="uid://bgqoc2ptnrbru" path="res://assets/chair.tscn" id="11_xouko"]
+[ext_resource type="PackedScene" uid="uid://or7x5sip23ge" path="res://assets/table.tscn" id="12_vylbd"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -152,6 +155,30 @@ shape = SubResource("WorldBoundaryShape3D_41oaq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53889, -3.21546, 4.60989)
 mesh = SubResource("CylinderMesh_dht4l")
 skeleton = NodePath("../..")
+
+[node name="Bin" parent="Map" instance=ExtResource("10_y8nvh")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 5.83117, -2.44018, 2.04401)
+
+[node name="Bin2" parent="Map" instance=ExtResource("10_y8nvh")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 3.18439, -2.44018, 10.6286)
+
+[node name="Chair" parent="Map" instance=ExtResource("11_xouko")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.876857, -2.46012, 3.48361)
+
+[node name="Chair2" parent="Map" instance=ExtResource("11_xouko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.914678, -2.46012, 5.66697)
+
+[node name="Table" parent="Map" instance=ExtResource("12_vylbd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.931492, -2.46012, 4.57642)
+
+[node name="Chair3" parent="Map" instance=ExtResource("11_xouko")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.54739, -2.46012, 9.83759)
+
+[node name="Chair4" parent="Map" instance=ExtResource("11_xouko")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.635957, -2.46012, 9.79977)
+
+[node name="Table2" parent="Map" instance=ExtResource("12_vylbd")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.454587, -2.46012, 9.78296)
 
 [node name="TaskList" parent="." instance=ExtResource("5_abj7b")]
 

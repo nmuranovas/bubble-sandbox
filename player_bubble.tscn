@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cewsjr3phpr0h"]
 
 [ext_resource type="Script" path="res://player_bubble.gd" id="1_qgob0"]
-[ext_resource type="PackedScene" path="res://pop_effect.tscn" id="2_o8yy3"]
+[ext_resource type="PackedScene" uid="uid://dw3ad7sofc6bp" path="res://pop_effect.tscn" id="2_o8yy3"]
 [ext_resource type="AudioStream" uid="uid://cn4tdta4tluje" path="res://assets/audio/Bubble_Wobble_Sfx_1.wav" id="4_tphru"]
 [ext_resource type="Shader" path="res://bubble_new.gdshader" id="5_3f5ay"]
 
