@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cte2yffrokpwy"]
+[gd_scene load_steps=9 format=3 uid="uid://cte2yffrokpwy"]
 
 [ext_resource type="Script" path="res://child/child.gd" id="1_vmpoj"]
 [ext_resource type="Texture2D" uid="uid://byhqwoj3ul36t" path="res://child/face.jpg" id="2_w37pf"]
@@ -20,6 +20,10 @@ size = Vector2(0.2, 0.2)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cldbq"]
 radius = 0.05
 height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dls2b"]
+radius = 0.4
+height = 1.06471
 
 [node name="Child" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -54,3 +58,12 @@ mesh = SubResource("CapsuleMesh_cldbq")
 [node name="LeftArm" type="MeshInstance3D" parent="Arms"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.191, 0, -0.2)
 mesh = SubResource("CapsuleMesh_cldbq")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.170697, -0.0652649)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0923877)
+shape = SubResource("CapsuleShape3D_dls2b")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cewsjr3phpr0h"]
+[gd_scene load_steps=8 format=3 uid="uid://cewsjr3phpr0h"]
 
 [ext_resource type="Script" path="res://player_bubble.gd" id="1_qgob0"]
+[ext_resource type="PackedScene" uid="uid://dw3ad7sofc6bp" path="res://pop_effect.tscn" id="2_o8yy3"]
 [ext_resource type="Shader" path="res://bubble_new.gdshader" id="5_3f5ay"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vpxpl"]
@@ -39,6 +40,7 @@ can_sleep = false
 linear_damp = 2.0
 script = ExtResource("1_qgob0")
 move_speed = 5.0
+explosion_particles = ExtResource("2_o8yy3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_girrl")
@@ -46,7 +48,7 @@ shape = SubResource("SphereShape3D_girrl")
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13995, 0.600946)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="Bubble" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_xf1l1")
 skeleton = NodePath("")

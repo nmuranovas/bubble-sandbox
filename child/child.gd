@@ -78,3 +78,9 @@ func turn_towards_angle(current_angle: float, target_angle: float, walk_speed: f
 	var step = clamp(angle_diff, -max_step, max_step)
 	
 	return current_angle + step
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body is Bubble:
+		Autobusas.die_signal.emit()
+		Autobusas.get_achievement.emit("child")

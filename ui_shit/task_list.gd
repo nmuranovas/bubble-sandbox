@@ -33,7 +33,7 @@ var achievments: Array = [
 	},
 	{
 		'is_done': false,
-		'code': 'children',
+		'code': 'child',
 		'list_text': 'avoid being popped by children',
 		'list_done': 'cute little monsters'
 	},
@@ -111,14 +111,11 @@ var achievments: Array = [
 func _ready() -> void:
 	update_list_text()
 	pop_up_node.visible = false
+	Autobusas.get_achievement.connect(complete)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	
-	if Input.is_action_pressed("ui_accept"):
-		complete('sandwich')
-	
 	if Input.is_action_just_pressed("ui_cancel"):
 		list_node.visible = not list_node.visible
 		
@@ -185,6 +182,6 @@ func generate_text() -> String:
 func with_strikethrough(achievment: Dictionary) -> String:
 	
 	if achievment['is_done']:
-		return '☑    [s]' + achievment['list_text'] + '[/s]'
+		return '☒    [s]' + achievment['list_text'] + '[/s]'
 	else:
 		return '☐    ' + achievment['list_text']

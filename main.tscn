@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://biqqdohmyymjn"]
+[gd_scene load_steps=18 format=3 uid="uid://biqqdohmyymjn"]
 
 [ext_resource type="PackedScene" uid="uid://cewsjr3phpr0h" path="res://player_bubble.tscn" id="1_2512a"]
 [ext_resource type="Texture2D" uid="uid://ks833nv6hkrh" path="res://icon.svg" id="2_wv50y"]
 [ext_resource type="PackedScene" uid="uid://cte2yffrokpwy" path="res://child/child.tscn" id="3_sut42"]
 [ext_resource type="PackedScene" uid="uid://ba2g72xcfbfih" path="res://map/map.tscn" id="4_nx04s"]
+[ext_resource type="PackedScene" uid="uid://rc8f7yjt1wtu" path="res://ui_shit/task_list.tscn" id="5_abj7b"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_e43t2"]
 vertices = PackedVector3Array(-6.5, 0.5, -4.81681, -6.5, 0.5, 8.18319, 6.5, 0.5, 8.18319, 6.5, 0.5, -4.81681)
@@ -69,13 +70,17 @@ mesh = SubResource("PlaneMesh_vo575")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lp16l")
 
-[node name="PlayerBubble2" parent="." instance=ExtResource("1_2512a")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.92295, 5.30095, -4.05429)
+[node name="Spawn" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.73674, 5.13898, -4.05429)
+
+[node name="PlayerBubble2" parent="." node_paths=PackedStringArray("spawn") instance=ExtResource("1_2512a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.73674, 5.13898, -4.05429)
+spawn = NodePath("../Spawn")
 
 [node name="Child" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sut42")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95207, 0.596156, 0.442205)
 target = NodePath("../PlayerBubble2")
-attention_range = 4.0
+attention_range = 3.0
 walk_speed = 1.0
 
 [node name="Map" parent="." instance=ExtResource("4_nx04s")]
@@ -114,3 +119,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.61302, 7.49447, 19.9609)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790239, -15.6002)
 shape = SubResource("WorldBoundaryShape3D_41oaq")
+
+[node name="TaskList" parent="." instance=ExtResource("5_abj7b")]

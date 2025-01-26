@@ -1,16 +1,41 @@
+class_name Bubble
 extends RigidBody3D
 
 @export var move_speed : float = 20.0
 
 @export var disable_movement: bool
 
+@export var explosion_particles: PackedScene
+
+@export var spawn: Node3D
+
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var camera: Camera3D = $Camera
+
+@onready var bubble: MeshInstance3D = $Bubble
 
 var accumulator: Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Autobusas.die_signal.connect(die)
+
+func die():
+	var particles = explosion_particles.instantiate()
+	add_child(particles)
+	particles.global_position = global_position
+	bubble.visible = false
+	disable_movement = true
+	freeze = true
+	
+	await get_tree().create_timer(3).timeout
+	
+	freeze = false
+	disable_movement = false
+	bubble.visible = true
+	global_position = spawn.global_position
+	global_rotation = spawn.global_rotation
+	
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.transform.basis = state.transform.basis.rotated(Vector3.UP, accumulator.y)
@@ -39,8 +64,7 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		accumulator.y += -event.relative.x * 0.001
 		accumulator.x += -event.relative.y * 0.001
-		rotate_object_local
-		#rotate(Vector3.UP, -event.relative.x * 0.001)
-		#rotate_object_local(Vector3.RIGHT, -event.relative.y * 0.001)
-		#print(rotation)
+	
+	if event is InputEventKey and event.keycode == KEY_TAB:
+		Autobusas.die_signal.emit()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mp1j5ecmoukw"]
+[gd_scene load_steps=9 format=3 uid="uid://dw3ad7sofc6bp"]
 
 [ext_resource type="Shader" path="res://soap_bubble.gdshader" id="1_1r246"]
 [ext_resource type="Script" path="res://pop_effect.gd" id="2_r0hok"]
@@ -25,8 +25,10 @@ scale_curve = SubResource("CurveTexture_b270n")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_48822"]
 render_priority = 0
 shader = ExtResource("1_1r246")
-shader_parameter/fuwafuwa_speed = 1.5
-shader_parameter/fuwafuwa_size = 0.05
+shader_parameter/distortion_speed = 0.5
+shader_parameter/distortion_power = 0.1
+shader_parameter/bubble_speed = 1.5
+shader_parameter/bubble_size = 0.05
 shader_parameter/outline_color = Color(0.45, 0.7, 1, 1)
 shader_parameter/outline_ratio = 1.0
 shader_parameter/noise_speed = 0.2

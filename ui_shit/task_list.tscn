@@ -27,6 +27,7 @@ menu_close_sound = NodePath("MenuCloseSound")
 achievment_pop_sound = NodePath("AchiementPopUp")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -71,6 +72,7 @@ layout_mode = 2
 texture = ExtResource("3_eeqjw")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
